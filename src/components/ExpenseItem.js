@@ -1,8 +1,10 @@
 function ExpenseItem(props) {
-    return (
-        <div>{props.title}</div>
-    )
-
+  return (
+    <div>
+      <div>{props.title}</div>
+      <div>${props.amount}</div>
+    </div>
+  );
 }
 
 export default ExpenseItem;
