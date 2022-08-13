@@ -1,4 +1,5 @@
 import ExpenseItem from "./ExpenseItem";
+import "./Expenses.css";
 
 function Expenses(props) {
   const items = props.items.map((item) => (
@@ -9,7 +10,7 @@ function Expenses(props) {
       amount={item.amount}
     ></ExpenseItem>
   ));
-  return <div>{items}</div>;
+  return <div className="expenses">{items}</div>;
 }
 
 export default Expenses;
