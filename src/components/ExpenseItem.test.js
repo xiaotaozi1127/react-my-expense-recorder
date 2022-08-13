@@ -9,3 +9,16 @@ test("should render expense title and amount", () => {
   const expenseAmount = screen.getByText("$65.4");
   expect(expenseAmount).toBeInTheDocument();
 });
+
+test("should render expense date", () => {
+  render(<ExpenseItem date="2022-08-09" />);
+
+  const yearOfExpenseDate = screen.getByText("2022");
+  expect(yearOfExpenseDate).toBeInTheDocument();
+
+  const monthOfExpenseDate = screen.getByText("August");
+  expect(monthOfExpenseDate).toBeInTheDocument();
+
+  const dayOfExpenseDate = screen.getByText("09");
+  expect(dayOfExpenseDate).toBeInTheDocument();
+});
