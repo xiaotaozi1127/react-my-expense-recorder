@@ -1,4 +1,5 @@
 import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
   const expenseItemArray = [
@@ -22,7 +23,12 @@ function App() {
     },
   ];
 
-  return <Expenses items={expenseItemArray} />;
+  return (
+    <div>
+      <NewExpense></NewExpense>
+      <Expenses items={expenseItemArray} />
+    </div>
+  );
 }
 
 export default App;
