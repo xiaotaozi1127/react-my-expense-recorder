@@ -23,20 +23,16 @@ function App() {
       amount: 350,
     },
   ];
-
   const [expenses, setExpenses] = useState(expenseItemArray);
-
   const newExpenseCreateHandler = (newExpense) => {
-    console.log("App component receive new expense:" + newExpense.amount);
-    let array = expenses;
-    array.push(newExpense);
-    setExpenses(array);
-    console.log(expenses);
+    setExpenses((prevState) => {
+      return [newExpense, ...prevState];
+    });
   };
 
   return (
     <div>
-      <NewExpense receiveNewExpense={newExpenseCreateHandler}></NewExpense>
+      <NewExpense onNewExpenseCreated={newExpenseCreateHandler}></NewExpense>
       <Expenses items={expenses} />
     </div>
   );
