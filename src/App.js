@@ -23,9 +23,13 @@ function App() {
     },
   ];
 
+  const newExpenseCreateHandler = (newExpense) => {
+    console.log("App component receive new expense:" + newExpense.amount);
+  };
+
   return (
     <div>
-      <NewExpense></NewExpense>
+      <NewExpense receiveNewExpense={newExpenseCreateHandler}></NewExpense>
       <Expenses items={expenseItemArray} />
     </div>
   );
