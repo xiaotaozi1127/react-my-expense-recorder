@@ -5,7 +5,7 @@ function ExpenseForm(props) {
   const [newExpense, setNewExpense] = useState({
     title: "",
     amount: "",
-    date: new Date(2022, 11, 2),
+    date: "",
   });
 
   const titleChangeHandler = (event) => {
@@ -41,6 +41,11 @@ function ExpenseForm(props) {
       ...newExpense,
       id: Math.random().toString(),
     });
+    setNewExpense({
+      title: "",
+      amount: "",
+      date: "",
+    });
   };
 
   return (
@@ -70,9 +75,9 @@ function ExpenseForm(props) {
             value={newExpense.date}
           ></input>
         </div>
-        <div className="new-expense__actions">
-          <button type="submit">Add Expense</button>
-        </div>
+      </div>
+      <div className="new-expense__actions">
+        <button type="submit">Add Expense</button>
       </div>
     </form>
   );

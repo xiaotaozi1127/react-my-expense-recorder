@@ -5,7 +5,7 @@ import "./Expenses.css";
 import { useState, useEffect } from "react";
 
 function Expenses(props) {
-  const [filteredYear, setFilteredYear] = useState(2021);
+  const [filteredYear, setFilteredYear] = useState();
   const [filteredItems, setFilteredItems] = useState(props.items);
 
   useEffect(() => {
@@ -31,9 +31,8 @@ function Expenses(props) {
         selected={filteredYear}
         onExpenseFilterChange={expenseFilterChangeHandler}
       />
-      {filteredItems.length === 0 ? (
-        <p>No expense item found</p>
-      ) : (
+      {filteredItems.length === 0 && <p>No expense item found</p>}
+      {filteredItems.length > 0 &&
         filteredItems.map((item) => (
           <ExpenseItem
             key={item.id}
@@ -41,8 +40,7 @@ function Expenses(props) {
             title={item.title}
             amount={item.amount}
           ></ExpenseItem>
-        ))
-      )}
+        ))}
     </Card>
   );
 }
