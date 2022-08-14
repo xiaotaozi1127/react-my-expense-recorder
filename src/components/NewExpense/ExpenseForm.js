@@ -37,7 +37,10 @@ function ExpenseForm(props) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onNewExpenseCreated(newExpense);
+    props.onNewExpenseCreated({
+      ...newExpense,
+      id: Math.random().toString(),
+    });
   };
 
   return (
@@ -54,7 +57,7 @@ function ExpenseForm(props) {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
-            type="text"
+            type="number"
             onChange={amountChangeHandler}
             value={newExpense.amount}
           ></input>
