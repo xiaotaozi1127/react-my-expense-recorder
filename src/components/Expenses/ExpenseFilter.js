@@ -2,9 +2,9 @@ import "./ExpenseFilter.css";
 
 function ExpenseFilter(props) {
   const changeSelectHandler = (event) => {
-    console.log("you select " + event.target.value);
     props.onExpenseFilterChange(event.target.value);
   };
+
   return (
     <div className="expenses-filter">
       <div className="expenses-filter__control">

@@ -5,17 +5,17 @@ import "./Expenses.css";
 import { useState } from "react";
 
 function Expenses(props) {
+  const [filteredYear, setFilteredYear] = useState();
+
   const expenseFilterChangeHandler = (filteredYear) => {
-    console.log("filtered year = " + filteredYear);
-    let filteredItems = props.items.filter((item) => {
-      let itemYear = new Date(item.date).getFullYear();
-      console.log("itemYear = " + itemYear);
-      return itemYear === parseInt(filteredYear);
-    });
-    console.log(filteredItems);
+    setFilteredYear(filteredYear);
   };
 
-  const items = props.items.map((item) => (
+  let filteredItems = props.items.filter((item) => {
+    return new Date(item.date).getFullYear() === parseInt(filteredYear);
+  });
+
+  const items = filteredItems.map((item) => (
     <ExpenseItem
       key={item.id}
       date={item.date}
