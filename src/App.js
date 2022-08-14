@@ -1,5 +1,6 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
+import { useState } from "react";
 
 function App() {
   const expenseItemArray = [
@@ -23,14 +24,23 @@ function App() {
     },
   ];
 
+  const [expenses, setExpenses] = useState(expenseItemArray);
+
   const newExpenseCreateHandler = (newExpense) => {
     console.log("App component receive new expense:" + newExpense.amount);
+    let array = expenses;
+    array.push({
+      id: (expenses.length + 1).toString(),
+      ...newExpense,
+    });
+    setExpenses(array);
+    console.log(expenses);
   };
 
   return (
     <div>
       <NewExpense receiveNewExpense={newExpenseCreateHandler}></NewExpense>
-      <Expenses items={expenseItemArray} />
+      <Expenses items={expenses} />
     </div>
   );
 }
