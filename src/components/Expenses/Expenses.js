@@ -5,7 +5,7 @@ import "./Expenses.css";
 import { useState, useEffect } from "react";
 
 function Expenses(props) {
-  const [filteredYear, setFilteredYear] = useState();
+  const [filteredYear, setFilteredYear] = useState(2022);
   const [filteredItems, setFilteredItems] = useState(props.items);
 
   useEffect(() => {
