@@ -8,6 +8,8 @@ function ExpenseForm(props) {
     date: "",
   });
 
+  const [displayForm, setDisplayForm] = useState(false);
+
   const titleChangeHandler = (event) => {
     setNewExpense((prevState) => {
       return {
@@ -35,6 +37,10 @@ function ExpenseForm(props) {
     });
   };
 
+  const newExpenseClickHandler = () => {
+    setDisplayForm(true);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     props.onNewExpenseCreated({
@@ -46,9 +52,14 @@ function ExpenseForm(props) {
       amount: "",
       date: "",
     });
+    setDisplayForm(false);
   };
 
-  return (
+  const cancelSubmitHandler = () => {
+    setDisplayForm(false);
+  };
+
+  const renderComponent = displayForm ? (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
@@ -80,10 +91,15 @@ function ExpenseForm(props) {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button onClick={cancelSubmitHandler}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
+  ) : (
+    <button onClick={newExpenseClickHandler}>Add New Expense</button>
   );
+
+  return renderComponent;
 }
 
 export default ExpenseForm;

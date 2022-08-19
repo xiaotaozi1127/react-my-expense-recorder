@@ -5,6 +5,11 @@ import App from "./App";
 test("when add a new expense item under filtered year, it will show up in the list", () => {
   render(<App />);
 
+  const addExpenseButton = screen.getByRole("button", {
+    name: "Add New Expense",
+  });
+  userEvent.click(addExpenseButton);
+
   const newExpenseTitle = screen.getByTestId("new-expense-title");
   const newExpenseAmount = screen.getByTestId("new-expense-amount");
   const newExpenseDate = screen.getByTestId("new-expense-date");
@@ -22,6 +27,11 @@ test("when add a new expense item under filtered year, it will show up in the li
 
 test("when add a new expense item not under filtered year, it will not show up in the list", () => {
   render(<App />);
+
+  const addExpenseButton = screen.getByRole("button", {
+    name: "Add New Expense",
+  });
+  userEvent.click(addExpenseButton);
 
   const newExpenseTitle = screen.getByTestId("new-expense-title");
   const newExpenseAmount = screen.getByTestId("new-expense-amount");

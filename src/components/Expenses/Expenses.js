@@ -25,22 +25,27 @@ function Expenses(props) {
     );
   };
 
+  const filteredComponent =
+    filteredItems.length === 0 ? (
+      <p>No expense item found</p>
+    ) : (
+      filteredItems.map((item) => (
+        <ExpenseItem
+          key={item.id}
+          date={item.date}
+          title={item.title}
+          amount={item.amount}
+        ></ExpenseItem>
+      ))
+    );
+
   return (
     <Card className="expenses">
       <ExpenseFilter
         selected={filteredYear}
         onExpenseFilterChange={expenseFilterChangeHandler}
       />
-      {filteredItems.length === 0 && <p>No expense item found</p>}
-      {filteredItems.length > 0 &&
-        filteredItems.map((item) => (
-          <ExpenseItem
-            key={item.id}
-            date={item.date}
-            title={item.title}
-            amount={item.amount}
-          ></ExpenseItem>
-        ))}
+      {filteredComponent}
     </Card>
   );
 }
