@@ -54,6 +54,7 @@ function ExpenseForm(props) {
         <div className="new-expense__control">
           <label>Title</label>
           <input
+            data-testid="new-expense-title"
             type="text"
             onChange={titleChangeHandler}
             value={newExpense.title}
@@ -62,6 +63,7 @@ function ExpenseForm(props) {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
+            data-testid="new-expense-amount"
             type="number"
             onChange={amountChangeHandler}
             value={newExpense.amount}
@@ -70,6 +72,7 @@ function ExpenseForm(props) {
         <div className="new-expense__control">
           <label>Date</label>
           <input
+            data-testid="new-expense-date"
             type="date"
             onChange={dateChangeHandler}
             value={newExpense.date}
