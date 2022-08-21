@@ -1,41 +1,12 @@
 import "./ExpenseForm.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function ExpenseForm(props) {
-  const [newExpense, setNewExpense] = useState({
-    title: "",
-    amount: "",
-    date: "",
-  });
+  const expenseTitleInputRef = useRef();
+  const expenseAmountInputRef = useRef();
+  const expenseDateInputRef = useRef();
 
   const [displayForm, setDisplayForm] = useState(false);
-
-  const titleChangeHandler = (event) => {
-    setNewExpense((prevState) => {
-      return {
-        ...prevState,
-        title: event.target.value,
-      };
-    });
-  };
-
-  const amountChangeHandler = (event) => {
-    setNewExpense((prevState) => {
-      return {
-        ...prevState,
-        amount: event.target.value,
-      };
-    });
-  };
-
-  const dateChangeHandler = (event) => {
-    setNewExpense((prevState) => {
-      return {
-        ...prevState,
-        date: event.target.value,
-      };
-    });
-  };
 
   const newExpenseClickHandler = () => {
     setDisplayForm(true);
@@ -44,14 +15,14 @@ function ExpenseForm(props) {
   const submitHandler = (event) => {
     event.preventDefault();
     props.onNewExpenseCreated({
-      ...newExpense,
       id: Math.random().toString(),
+      title: expenseTitleInputRef.current.value,
+      amount: expenseAmountInputRef.current.value,
+      date: expenseDateInputRef.current.value
     });
-    setNewExpense({
-      title: "",
-      amount: "",
-      date: "",
-    });
+    expenseTitleInputRef.current.value = "";
+    expenseAmountInputRef.current.value = "";
+    expenseDateInputRef.current.value = "";
     setDisplayForm(false);
   };
 
@@ -67,8 +38,7 @@ function ExpenseForm(props) {
           <input
             data-testid="new-expense-title"
             type="text"
-            onChange={titleChangeHandler}
-            value={newExpense.title}
+            ref={expenseTitleInputRef}
           ></input>
         </div>
         <div className="new-expense__control">
@@ -76,8 +46,7 @@ function ExpenseForm(props) {
           <input
             data-testid="new-expense-amount"
             type="number"
-            onChange={amountChangeHandler}
-            value={newExpense.amount}
+            ref={expenseAmountInputRef}
           ></input>
         </div>
         <div className="new-expense__control">
@@ -85,8 +54,7 @@ function ExpenseForm(props) {
           <input
             data-testid="new-expense-date"
             type="date"
-            onChange={dateChangeHandler}
-            value={newExpense.date}
+            ref={expenseDateInputRef}
           ></input>
         </div>
       </div>

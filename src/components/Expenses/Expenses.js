@@ -18,11 +18,6 @@ function Expenses(props) {
 
   const expenseFilterChangeHandler = (filteredYear) => {
     setFilteredYear(filteredYear);
-    setFilteredItems(
-      props.items.filter((item) => {
-        return new Date(item.date).getFullYear() === parseInt(filteredYear);
-      })
-    );
   };
 
   const filteredComponent =
