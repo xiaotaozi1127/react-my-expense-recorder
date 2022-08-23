@@ -1,5 +1,6 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
+// import Example from "./Example";
 import { useState } from "react";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
     <div>
       <NewExpense onNewExpenseCreated={newExpenseCreateHandler}></NewExpense>
       <Expenses items={expenses} />
+      {/* <Example></Example> */}
     </div>
   );
 }
