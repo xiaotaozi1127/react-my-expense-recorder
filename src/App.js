@@ -2,6 +2,7 @@ import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 // import Example from "./Example";
 import { useState } from "react";
+import MyContext from "./components/Contexts/MyContext";
 
 function App() {
   const expenseItemArray = [
@@ -33,7 +34,9 @@ function App() {
 
   return (
     <div>
-      <NewExpense onNewExpenseCreated={newExpenseCreateHandler}></NewExpense>
+      <MyContext.Provider value={newExpenseCreateHandler}>
+        <NewExpense></NewExpense>
+      </MyContext.Provider>
       <Expenses items={expenses} />
       {/* <Example></Example> */}
     </div>

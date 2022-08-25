@@ -1,10 +1,14 @@
 import "./ExpenseForm.css";
 import { useState, useRef } from "react";
+import MyContext from "../Contexts/MyContext";
+import { useContext } from "react";
 
-function ExpenseForm(props) {
+function ExpenseForm() {
   const expenseTitleInputRef = useRef();
   const expenseAmountInputRef = useRef();
   const expenseDateInputRef = useRef();
+
+  const newExpenseCreatedhandler = useContext(MyContext);
 
   const [displayForm, setDisplayForm] = useState(false);
 
@@ -14,11 +18,11 @@ function ExpenseForm(props) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onNewExpenseCreated({
+    newExpenseCreatedhandler({
       id: Math.random().toString(),
       title: expenseTitleInputRef.current.value,
       amount: expenseAmountInputRef.current.value,
-      date: expenseDateInputRef.current.value
+      date: expenseDateInputRef.current.value,
     });
     expenseTitleInputRef.current.value = "";
     expenseAmountInputRef.current.value = "";
