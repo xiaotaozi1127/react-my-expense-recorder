@@ -10,6 +10,7 @@ function ChartBar(props) {
     <div className="chart-bar">
       <div className="chart-bar__inner">
         <div
+          data-testid={`${props.label}-fill`}
           className="chart-bar__fill"
           style={{ height: barFillHeight }}
         ></div>

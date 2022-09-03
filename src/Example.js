@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function Example() {
   const [count, setCount] = useState(0);
-  const [title, setTitle] = useState("hello");
+  const [heading, setHeading] = useState("hello");
   useEffect(() => {
     console.log("use effect runs!!");
     document.title = `you cliked ${count} times!`;
@@ -11,7 +11,7 @@ function Example() {
   return (
     <div>
       <p>you clicked {count} times.</p>
-      <p>{title}</p>
+      <p>{heading}</p>
       <button
         onClick={() => {
           setCount(count + 1);
@@ -19,7 +19,9 @@ function Example() {
       >
         click me!
       </button>
-      <button onClick={() => setTitle("new title")}>change title</button>
+      <button onClick={() => setHeading("heading - " + Math.random() * 100)}>
+        change heading
+      </button>
     </div>
   );
 }
