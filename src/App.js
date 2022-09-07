@@ -7,7 +7,7 @@ function App() {
   const [expenses, setExpenses] = useState([]);
 
   const fetchExpenseItems = useCallback(async () => {
-    const url = "http://localhost:8080";
+    const url = "http://localhost:8080/expenses";
     const response = await fetch(url);
     const data = await response.json();
     setExpenses(data);
@@ -17,10 +17,19 @@ function App() {
     fetchExpenseItems();
   }, [fetchExpenseItems]);
 
-  const newExpenseCreateHandler = (newExpense) => {
-    setExpenses((prevState) => {
-      return [newExpense, ...prevState];
-    });
+  const newExpenseCreateHandler = async (newExpense) => {
+    const url = "http://localhost:8080/expense";
+    const options = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      },
+      body: JSON.stringify(newExpense),
+    };
+    const response = await fetch(url, options);
+    const data = await response.json();
+    setExpenses(data);
   };
 
   return (
