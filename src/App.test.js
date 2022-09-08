@@ -2,8 +2,21 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 
-test("when add a new expense item under filtered year, it will show up in the list", () => {
+test("should display the initial expense items loaded from server", async () => {
   render(<App />);
+
+  const yearFilter = screen.getByRole("combobox");
+  userEvent.selectOptions(yearFilter, ["2022"]);
+
+  const expenseItem = await screen.findByRole("heading", { name: "mock item" });
+  expect(expenseItem).toBeInTheDocument();
+});
+
+test("when add a new expense item under filtered year, it will show up in the list", async () => {
+  render(<App />);
+
+  const yearFilter = screen.getByRole("combobox");
+  userEvent.selectOptions(yearFilter, ["2022"]);
 
   const addExpenseButton = screen.getByRole("button", {
     name: "Add New Expense",
@@ -21,12 +34,15 @@ test("when add a new expense item under filtered year, it will show up in the li
   const submitButton = screen.getByRole("button", { name: "Add Expense" });
   userEvent.click(submitButton);
 
-  const newExpense = screen.getByRole("heading", { name: "dress" });
+  const newExpense = await screen.findByRole("heading", { name: "dress" });
   expect(newExpense).toBeInTheDocument();
 });
 
-test("when add a new expense item not under filtered year, it will not show up in the list", () => {
+test("when add a new expense item not under filtered year, it will not show up in the list", async () => {
   render(<App />);
+
+  const yearFilter = screen.getByRole("combobox");
+  userEvent.selectOptions(yearFilter, ["2022"]);
 
   const addExpenseButton = screen.getByRole("button", {
     name: "Add New Expense",
@@ -37,13 +53,14 @@ test("when add a new expense item not under filtered year, it will not show up i
   const newExpenseAmount = screen.getByTestId("new-expense-amount");
   const newExpenseDate = screen.getByTestId("new-expense-date");
 
-  userEvent.type(newExpenseTitle, "dress");
-  userEvent.type(newExpenseAmount, "20");
-  userEvent.type(newExpenseDate, "2021-08-06");
+  userEvent.type(newExpenseTitle, "phone");
+  userEvent.type(newExpenseAmount, "2000");
+  userEvent.type(newExpenseDate, "2021-09-10");
 
   const submitButton = screen.getByRole("button", { name: "Add Expense" });
   userEvent.click(submitButton);
 
-  const newExpense = screen.queryByRole("heading", { name: "dress" });
-  expect(newExpense).not.toBeInTheDocument();
+  await expect(screen.findByRole("heading", { name: "phone" })).rejects.toThrow(
+    Error
+  );
 });
