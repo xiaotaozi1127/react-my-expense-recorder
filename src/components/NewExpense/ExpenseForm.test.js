@@ -1,75 +1,102 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import MyContext from "../Contexts/MyContext";
 import ExpenseForm from "./ExpenseForm";
 
-test("should display add new expense button when init", () => {
-  render(<ExpenseForm />);
+describe("<ExpenseForm/>", () => {
+  const value = jest.fn();
 
-  const addnewExpenseButton = screen.getByRole("button", {
-    name: "Add New Expense",
-  });
-  expect(addnewExpenseButton).toBeInTheDocument();
-});
+  test("should display add new expense button when init", () => {
+    render(
+      <MyContext.Provider value={value}>
+        <ExpenseForm />
+      </MyContext.Provider>
+    );
 
-test("when click add new expense button, expense form will display", () => {
-  render(<ExpenseForm />);
-  const addnewExpenseButton = screen.getByRole("button", {
-    name: "Add New Expense",
-  });
-
-  userEvent.click(addnewExpenseButton);
-
-  const newExpenseTitle = screen.getByTestId("new-expense-title");
-  expect(newExpenseTitle).toBeInTheDocument();
-
-  const submitFormButton = screen.getByRole("button", { name: "Add Expense" });
-  expect(submitFormButton).toBeInTheDocument();
-
-  const cancelFormButton = screen.getByRole("button", { name: "Cancel" });
-  expect(cancelFormButton).toBeInTheDocument();
-});
-
-test("when submit form, form will disappear", () => {
-  render(<ExpenseForm onNewExpenseCreated={() => {}} />);
-  const addnewExpenseButton = screen.getByRole("button", {
-    name: "Add New Expense",
+    const addnewExpenseButton = screen.getByRole("button", {
+      name: "Add New Expense",
+    });
+    expect(addnewExpenseButton).toBeInTheDocument();
   });
 
-  userEvent.click(addnewExpenseButton);
+  test("when click add new expense button, expense form will display", () => {
+    render(
+      <MyContext.Provider value={value}>
+        <ExpenseForm />
+      </MyContext.Provider>
+    );
+    const addnewExpenseButton = screen.getByRole("button", {
+      name: "Add New Expense",
+    });
 
-  const newExpenseTitle = screen.getByTestId("new-expense-title");
-  expect(newExpenseTitle).toBeInTheDocument();
+    userEvent.click(addnewExpenseButton);
 
-  const submitFormButton = screen.getByRole("button", { name: "Add Expense" });
-  expect(submitFormButton).toBeInTheDocument();
+    const newExpenseTitle = screen.getByTestId("new-expense-title");
+    expect(newExpenseTitle).toBeInTheDocument();
 
-  userEvent.click(submitFormButton);
+    const submitFormButton = screen.getByRole("button", {
+      name: "Add Expense",
+    });
+    expect(submitFormButton).toBeInTheDocument();
 
-  const addnewExpenseButtonAgain = screen.getByRole("button", {
-    name: "Add New Expense",
+    const cancelFormButton = screen.getByRole("button", { name: "Cancel" });
+    expect(cancelFormButton).toBeInTheDocument();
   });
 
-  expect(addnewExpenseButtonAgain).toBeInTheDocument();
-});
+  test("when submit form, form will disappear", () => {
+    render(
+      <MyContext.Provider value={value}>
+        <ExpenseForm />
+      </MyContext.Provider>
+    );
+    const addnewExpenseButton = screen.getByRole("button", {
+      name: "Add New Expense",
+    });
 
-test("when cancel the submit form, form will disappear", () => {
-  render(<ExpenseForm onNewExpenseCreated={() => {}} />);
-  const addnewExpenseButton = screen.getByRole("button", {
-    name: "Add New Expense",
+    userEvent.click(addnewExpenseButton);
+
+    const newExpenseTitle = screen.getByTestId("new-expense-title");
+    expect(newExpenseTitle).toBeInTheDocument();
+
+    const submitFormButton = screen.getByRole("button", {
+      name: "Add Expense",
+    });
+    expect(submitFormButton).toBeInTheDocument();
+
+    userEvent.click(submitFormButton);
+
+    const addnewExpenseButtonAgain = screen.getByRole("button", {
+      name: "Add New Expense",
+    });
+
+    expect(addnewExpenseButtonAgain).toBeInTheDocument();
   });
 
-  userEvent.click(addnewExpenseButton);
+  test("when cancel the submit form, form will disappear", () => {
+    render(
+      <MyContext.Provider value={value}>
+        <ExpenseForm />
+      </MyContext.Provider>
+    );
+    const addnewExpenseButton = screen.getByRole("button", {
+      name: "Add New Expense",
+    });
 
-  const newExpenseTitle = screen.getByTestId("new-expense-title");
-  expect(newExpenseTitle).toBeInTheDocument();
+    userEvent.click(addnewExpenseButton);
 
-  const cancelSubmitFormButton = screen.getByRole("button", { name: "Cancel" });
-  expect(cancelSubmitFormButton).toBeInTheDocument();
+    const newExpenseTitle = screen.getByTestId("new-expense-title");
+    expect(newExpenseTitle).toBeInTheDocument();
 
-  userEvent.click(cancelSubmitFormButton);
+    const cancelSubmitFormButton = screen.getByRole("button", {
+      name: "Cancel",
+    });
+    expect(cancelSubmitFormButton).toBeInTheDocument();
 
-  const addnewExpenseButtonAgain = screen.getByRole("button", {
-    name: "Add New Expense",
+    userEvent.click(cancelSubmitFormButton);
+
+    const addnewExpenseButtonAgain = screen.getByRole("button", {
+      name: "Add New Expense",
+    });
+    expect(addnewExpenseButtonAgain).toBeInTheDocument();
   });
-  expect(addnewExpenseButtonAgain).toBeInTheDocument();
 });
