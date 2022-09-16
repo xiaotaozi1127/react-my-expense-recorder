@@ -1,5 +1,5 @@
 import ExpenseItem from "./ExpenseItem";
-import ExpensesChart from "./ExpensesChart";
+import ExpensesChart from "../Chart/ExpensesChart";
 
 function ExpenseList(props) {
   const filteredItems = props.filteredItems;
