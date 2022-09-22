@@ -3,29 +3,23 @@ import ExpenseList from "./ExpenseList";
 import Card from "../UI/Card";
 import "./Expenses.css";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function Expenses(props) {
-  const [filteredYear, setFilteredYear] = useState(2022);
   const [filteredItems, setFilteredItems] = useState(props.items);
+  const filteredYear = useSelector((state) => state.filteredYear.value);
 
   useEffect(() => {
     setFilteredItems(
       props.items.filter((item) => {
-        return new Date(item.date).getFullYear() === parseInt(filteredYear);
+        return new Date(item.date).getFullYear() === filteredYear;
       })
     );
   }, [filteredYear, props.items]);
 
-  const expenseFilterChangeHandler = (filteredYear) => {
-    setFilteredYear(filteredYear);
-  };
-
   return (
     <Card className="expenses">
-      <ExpenseFilter
-        selected={filteredYear}
-        onExpenseFilterChange={expenseFilterChangeHandler}
-      />
+      <ExpenseFilter />
       <ExpenseList filteredItems={filteredItems}></ExpenseList>
     </Card>
   );

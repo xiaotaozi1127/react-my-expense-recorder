@@ -1,15 +1,20 @@
 import "./ExpenseFilter.css";
+import { useSelector, useDispatch } from "react-redux";
+import { update } from "../../store/filteredYearSlice";
 
-function ExpenseFilter(props) {
+function ExpenseFilter() {
+  const filteredYear = useSelector((state) => state.filteredYear.value);
+  const dispatch = useDispatch();
+
   const changeSelectHandler = (event) => {
-    props.onExpenseFilterChange(event.target.value);
+    dispatch(update(parseInt(event.target.value)));
   };
 
   return (
     <div className="expenses-filter">
       <div className="expenses-filter__control">
         <label>Filter by year</label>
-        <select value={props.selected} onChange={changeSelectHandler}>
+        <select value={filteredYear} onChange={changeSelectHandler}>
           <option value="2022">2022</option>
           <option value="2021">2021</option>
           <option value="2020">2020</option>

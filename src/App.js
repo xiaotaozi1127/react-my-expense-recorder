@@ -2,6 +2,8 @@ import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import { useState, useEffect, useCallback } from "react";
 import MyContext from "./components/Contexts/MyContext";
+import { Provider } from "react-redux";
+import store from "./store/index";
 
 function App() {
   const [expenses, setExpenses] = useState([]);
@@ -13,9 +15,9 @@ function App() {
     setExpenses(data);
   }, []);
 
-  useEffect(() => {
-    fetchExpenseItems();
-  }, [fetchExpenseItems]);
+    useEffect(() => {
+        fetchExpenseItems();
+    }, [fetchExpenseItems]);
 
   const newExpenseCreateHandler = (newExpense) => {
     const url = "http://localhost:8080/expense";
@@ -40,7 +42,9 @@ function App() {
       <MyContext.Provider value={newExpenseCreateHandler}>
         <NewExpense/>
       </MyContext.Provider>
-      <Expenses items={expenses} />
+      <Provider store={store}>
+        <Expenses items={expenses} />
+      </Provider>
     </div>
   );
 }
