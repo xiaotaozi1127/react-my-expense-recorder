@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const filteredYearSlice = createSlice({
   name: "filteredYear",
-  initialState: { value: 2021 },
+  initialState: { value: 2022 },
   reducers: {
     update: (state, action) => {
       state.value = action.payload;

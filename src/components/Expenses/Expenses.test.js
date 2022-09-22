@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Expenses from "./Expenses";
+import { Provider } from "react-redux";
+import store from "../../store/index";
 
 test("should render correct expense item count by default filtered year", () => {
   const expenseItemArray = [
@@ -23,7 +25,7 @@ test("should render correct expense item count by default filtered year", () => 
       amount: 233,
     },
   ];
-  render(<Expenses items={expenseItemArray} />);
+  render(<Provider store={store}><Expenses items={expenseItemArray} /></Provider> );
 
   const expenseTV = screen.getByText("new tv");
   expect(expenseTV).toBeInTheDocument();
@@ -56,7 +58,7 @@ test("should render list by filtered year", () => {
       amount: 300,
     },
   ];
-  render(<Expenses items={expenseItemArray} />);
+  render(<Provider store={store}><Expenses items={expenseItemArray} /></Provider> );
 
   const yearFilter = screen.getByRole("combobox");
   userEvent.selectOptions(yearFilter, ["2021"]);
