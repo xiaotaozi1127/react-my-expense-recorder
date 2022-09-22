@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import Expenses from "./Expenses";
+import Expenses from "../Expenses";
 import { Provider } from "react-redux";
-import store from "../../store/index";
+import store from "../../../store";
 
 test("should render correct expense item count by default filtered year", () => {
   const expenseItemArray = [

@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ExpenseItem from "./ExpenseItem";
+import ExpenseItem from "../ExpenseItem";
 
 test("should render expense title and amount", () => {
   render(<ExpenseItem title="shoes" amount="65.4" />);

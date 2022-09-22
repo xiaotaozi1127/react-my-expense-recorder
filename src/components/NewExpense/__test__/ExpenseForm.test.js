@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import MyContext from "../Contexts/MyContext";
-import ExpenseForm from "./ExpenseForm";
+import MyContext from "../../../Contexts/MyContext";
+import ExpenseForm from "../ExpenseForm";
 
 describe("<ExpenseForm/>", () => {
   const value = jest.fn();

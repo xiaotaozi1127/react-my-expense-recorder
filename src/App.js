@@ -1,7 +1,7 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import { useState, useEffect, useCallback } from "react";
-import MyContext from "./components/Contexts/MyContext";
+import MyContext from "./Contexts/MyContext";
 import { Provider } from "react-redux";
 import store from "./store/index";
 

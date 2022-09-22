@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ExpensesChart from "./ExpensesChart";
+import ExpensesChart from "../ExpensesChart";
 
 test("should render chart according to expense item data", () => {
   const dataPoints = [

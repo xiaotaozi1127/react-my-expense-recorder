@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import ExpenseDate from "./ExpenseDate";
+import ExpenseDate from "../ExpenseDate";
 
 test("should render date correctly", () => {
   render(<ExpenseDate date="2022-08-13" />);

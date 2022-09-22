@@ -1,6 +1,6 @@
 import "./ExpenseForm.css";
 import { useState, useRef } from "react";
-import MyContext from "../Contexts/MyContext";
+import MyContext from "../../Contexts/MyContext";
 import { useContext } from "react";
 
 function ExpenseForm() {
