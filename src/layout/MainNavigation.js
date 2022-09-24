@@ -9,12 +9,12 @@ const MainNavigation = () => {
             <nav className={classes.nav}>
                 <ul>
                     <li>
-                        <NavLink to='/expenses' activeClassName={classes.active}>
+                        <NavLink to='/expenses' className={(navData) => navData.isActive ? classes.active : ''}>
                             All expenses
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to='/new-expense' activeClassName={classes.active}>
+                        <NavLink to='/new-expense' className={(navData) => navData.isActive ? classes.active : ''}>
                             Add new expense
                         </NavLink>
                     </li>

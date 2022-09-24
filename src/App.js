@@ -1,7 +1,7 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import { useState, useEffect, useCallback } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import MainNavigation from "./layout/MainNavigation";
 import MyContext from "./Contexts/MyContext";
 import { Provider } from "react-redux";
@@ -42,19 +42,18 @@ function App() {
   return (
     <div>
       <MainNavigation/>
-      <Route path='/' exact>
-        <Redirect to='/expenses' />
-      </Route>
-      <Route path="/expenses">
-        <Provider store={store}>
-          <Expenses items={expenses} />
-        </Provider>
-      </Route>
-      <Route path="/new-expense">
-        <MyContext.Provider value={newExpenseCreateHandler}>
-          <NewExpense/>
-        </MyContext.Provider>
-      </Route>
+        <Routes >
+            <Route path='/' exact element={<Navigate replace to='/expenses' />} />
+            <Route path="/expenses"
+                   element={<Provider store={store}>
+                       <Expenses items={expenses} />
+                   </Provider>}>
+            </Route>
+            <Route path="/new-expense" element={<MyContext.Provider value={newExpenseCreateHandler}>
+                                                <NewExpense/>
+            </MyContext.Provider>}>
+            </Route>
+        </Routes>
     </div>
   );
 }

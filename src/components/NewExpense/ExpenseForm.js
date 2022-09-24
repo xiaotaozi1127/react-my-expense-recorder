@@ -2,13 +2,13 @@ import "./ExpenseForm.css";
 import { useRef } from "react";
 import MyContext from "../../Contexts/MyContext";
 import { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ExpenseForm() {
   const expenseTitleInputRef = useRef();
   const expenseAmountInputRef = useRef();
   const expenseDateInputRef = useRef();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const newExpenseCreatedhandler = useContext(MyContext);
 
@@ -23,7 +23,7 @@ function ExpenseForm() {
     expenseTitleInputRef.current.value = "";
     expenseAmountInputRef.current.value = "";
     expenseDateInputRef.current.value = "";
-    history.push("/expenses");
+    navigate("/expenses");
   };
 
   const renderComponent =
