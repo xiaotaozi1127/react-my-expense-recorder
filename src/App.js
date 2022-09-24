@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Route, Redirect } from "react-router-dom";
 import AllExpenses from "./pages/AllExpenses";
 import AddNewExpense from "./pages/AddNewExpense";
+import MainNavigation from "./layout/MainNavigation";
 import MyContext from "./Contexts/MyContext";
 import { Provider } from "react-redux";
 import store from "./store/index";
@@ -42,6 +43,7 @@ function App() {
 
   return (
     <div>
+      <MainNavigation></MainNavigation>
       <Route path="/" exact>
         <AllExpenses></AllExpenses>
       </Route>
