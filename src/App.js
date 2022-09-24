@@ -1,6 +1,9 @@
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 import { useState, useEffect, useCallback } from "react";
+import { Route, Redirect } from "react-router-dom";
+import AllExpenses from "./pages/AllExpenses";
+import AddNewExpense from "./pages/AddNewExpense";
 import MyContext from "./Contexts/MyContext";
 import { Provider } from "react-redux";
 import store from "./store/index";
@@ -39,6 +42,12 @@ function App() {
 
   return (
     <div>
+      <Route path="/" exact>
+        <AllExpenses></AllExpenses>
+      </Route>
+      <Route path="/new-expense">
+        <AddNewExpense></AddNewExpense>
+      </Route>
       <MyContext.Provider value={newExpenseCreateHandler}>
         <NewExpense/>
       </MyContext.Provider>
