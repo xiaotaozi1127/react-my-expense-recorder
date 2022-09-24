@@ -1,20 +1,16 @@
 import "./ExpenseForm.css";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import MyContext from "../../Contexts/MyContext";
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 function ExpenseForm() {
   const expenseTitleInputRef = useRef();
   const expenseAmountInputRef = useRef();
   const expenseDateInputRef = useRef();
+  const history = useHistory();
 
   const newExpenseCreatedhandler = useContext(MyContext);
-
-  const [displayForm, setDisplayForm] = useState(false);
-
-  const newExpenseClickHandler = () => {
-    setDisplayForm(true);
-  };
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -27,14 +23,10 @@ function ExpenseForm() {
     expenseTitleInputRef.current.value = "";
     expenseAmountInputRef.current.value = "";
     expenseDateInputRef.current.value = "";
-    setDisplayForm(false);
+    history.push("/expenses");
   };
 
-  const cancelSubmitHandler = () => {
-    setDisplayForm(false);
-  };
-
-  const renderComponent = displayForm ? (
+  const renderComponent =
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
@@ -63,13 +55,9 @@ function ExpenseForm() {
         </div>
       </div>
       <div className="new-expense__actions">
-        <button onClick={cancelSubmitHandler}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
-    </form>
-  ) : (
-    <button onClick={newExpenseClickHandler}>Add New Expense</button>
-  );
+    </form>;
 
   return renderComponent;
 }
